@@ -8,7 +8,7 @@ public class Recursion {
 	return findSqrt(n, 1.0);
     }
 
-    public static double findSqrt(double n, double guess) {
+    private static double findSqrt(double n, double guess) {
 	if (n < 0) {
 	    throw new IllegalArgumentException();
 	}
@@ -24,7 +24,7 @@ public class Recursion {
     }
 
 
-    public static boolean isEqual(double a, double b) {
+    private static boolean isEqual(double a, double b) {
 	if (Math.abs(a-b) < a/100000000000.0) {
 	    return true;
 	}
