@@ -28,7 +28,15 @@ public class QueenBoard {
 	return total;
     }
 
-	    
+    // private void checkDiagonals(r, c) {
+    // 	int col = c;
+    // 	for (int row = r; row < board.length; row++) {
+    // 	    if (board[row][col] == -1) {
+    // 		removeQueen(r, c);
+    // 	    }
+    // 	    col++
+    // 		}
+
 
     public boolean solve() {
 	return solveHelper(0);
@@ -47,19 +55,20 @@ public class QueenBoard {
 
 	    if (board[r][c] == 0) {
 		addQueen(r,c);
-		for (int row = 0; row < board.length; row ++) {
-		    if (board[row][c] == -1 && row != r) {
-		    removeQueen[r][c];
-		    }
-		    if (board [r][row] == -1 && row != c) {
-		    removeQueen[r][c];
-		    }
-		}
-		checkDiagonals();
+		// for (int row = 0; row < board.length; row ++) {
+		//     if (board[row][c] == -1 && row != r) {
+		//     removeQueen[r][c];
+		//     }
+		//     if (board [r][row] == -1 && row != c) {
+		//     removeQueen[r][c];
+		//     }
+		// }
+		//checkDiagonals();
 		if (!Helper(col + 1)) {
 		    removeQueen[r][c];
 		}
 		if (board[r][c] == -1){
+		    setThreats();
 		    return Helper(col + 1);
 		}
 	    }
