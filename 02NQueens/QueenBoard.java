@@ -1,11 +1,11 @@
 public class QueenBoard {
     private int[][] board;
-    private int[][] realBoard;
-    //private list solutions_list
     private int solutionCount;
     private boolean works;
+    private int bigness;
 
     QueenBoard (int size) {
+	bigness = size;
 	board = new int[size][size];
 	works = false;
     }
@@ -16,7 +16,7 @@ public class QueenBoard {
 	    board[r][col] +=1;
 	}
 	for (int row = r + 1; row < board.length; row++) {
-	    board [row][c] +=1;
+	    board [row][c] += 1;
 	}
 	int rTL = r - 1, cTL = c - 1,
 	    rTR = r - 1, cTR = c + 1,
@@ -85,51 +85,78 @@ public class QueenBoard {
 	}
     }
 
-    // private int countQueens() {
-    // 	int total = 0;
-    // 	for (int r = 0; r < board.length; r++) {
-    // 	    for (int c = 0; c < board.length; c++) {
-    // 		if (board[r][c] == -1) {
-    // 		    total++;
-    // 		}
-    // 	    }
-    // 	}
-    // 	return total;
-    // }
 
 
     public boolean solve() {
-	solveHelper(0);
-	board = realBoard;
-	return works;
-
+	clear();
+        boolean returnVal=solveHelper(0);
+	return returnVal;
     }
 
-
-    
-    private boolean solveHelper(int c) {
+    // private boolean solveHelper(int c) {
 	
-	boolean solExist = false;
+    // 	boolean solExist = false;
+    // 	 if (c >= board.length) {
+    // 	     return true;
+    // 	}
+    // 	for (int r = 0; r < board.length; r++) {
+    // 	    if (board[r][c] == 0) {
+    // 		addQueen(r,c);
+    // 		boolean solution = solveHelper(c + 1);
+    // 		if (solution) {
+    // 		    solExist = true;
+    // 		    if( c == board.length - 1) {
+    //        		works = true;
+    // 			realBoard = board.clone();
+    // 			// System.out.println(board2string(realBoard));
+    // 			// System.out.println(board2string(board));
+    // 			solutionCount += 1;
+    // 		    }
+    // 		}
+    // 	       removeQueen(r,c);		    
+    // 	    }
+    // 	}
+    // 	return solExist;
+    // }
+
+
+    private boolean solveHelper(int c) {
+	if (c >= board.length) {
+	    return true;
+	}
+
+	for (int r = 0; r < board.length; r++) {
+	    if (board[r][c] == 0) {
+		addQueen (r, c);
+		boolean solution = solveHelper(c + 1);
+		if (solution) {
+		    return true;
+		}
+		removeQueen(r, c);
+	    }
+	}
+	return false;
+    }
+
+    private void clear() {
+	board = new int[bigness][bigness];
+    }
+
+    public boolean getSolCountH(int c) {
+	 boolean solExist = false;
 	 if (c >= board.length) {
 	     return true;
 	}
 	for (int r = 0; r < board.length; r++) {
-	    // if (board[r][c] == -1) {
-	    // 	return solveHelper( c + 1);
-	    // }
-	    // System.out.println(c);
-	    // System.out.println(r);
-	    // System.out.println('\n');
-	    
-
 	    if (board[r][c] == 0) {
 		addQueen(r,c);
-		boolean solution = solveHelper(c + 1);
+		boolean solution = getSolCountH(c + 1);
 		if (solution) {
 		    solExist = true;
-		    works = true;
 		    if( c == board.length - 1) {
-			realBoard = board.clone();
+			//realBoard = board.clone();
+			// System.out.println(board2string(realBoard));
+			// System.out.println(board2string(board));
 			solutionCount += 1;
 		    }
 		}
@@ -139,17 +166,30 @@ public class QueenBoard {
 	return solExist;
     }
 
-
-
     public int getSolutionCount() {
+	clear();
 	solutionCount = 0;
-	if (solve()) {
+	boolean x = getSolCountH(0);
+	if (x) {
+	    //clear();
+	    //getSolCountH(0);
 	    return solutionCount;
 	}
 	return -1;
     }
 
 
+    private static String board2string(int[][] ary) {
+	String out = "";
+    	for (int r = 0; r < ary.length; r ++) {
+	    out += "\n";
+	    for (int c = 0; c < ary[r].length; c++) {
+	        out += ary[r][c] + " ";
+	    }
+	}
+	return out;
+    }
+    
     public String toString(){
 	String out = "";
     	for (int r = 0; r < board.length; r ++) {
@@ -168,8 +208,14 @@ public class QueenBoard {
 	System.out.println(test);
 	System.out.println();
 	System.out.println(test.getSolutionCount());
-	// QueenBoard test2 = new QueenBoard(3);
-	// System.out.println( test2.solve());
-	// System.out.println(test2);
+	System.out.println();
+        System.out.println();
+        System.out.println();
+	QueenBoard test2 = new QueenBoard(3);
+	System.out.println( test2.solve());
+	System.out.println(test2);
+	QueenBoard test3 = new QueenBoard(10);
+	System.out.println();
+        System.out.println(test3.getSolutionCount());
     }
 }
