@@ -223,5 +223,15 @@ public class QueenBoard {
 	QueenBoard test3 = new QueenBoard(10);
 	System.out.println();
         System.out.println("10 x 10 board solutions: " + test3.getSolutionCount());
+	QueenBoard test4 = new QueenBoard(13);
+	System.out.println();
+	System.out.println("13 x 13 board solutions: " + test4.getSolutionCount());
+	System.out.println();
+	System.out.println();
+	QueenBoard test5 = new QueenBoard(1);
+	System.out.println("1 x 1: " + test.solve() );
+	System.out.println();
+	System.out.println("num solutions: " + test5.getSolutionCount());
+	System.out.println(test5);
     }
 }
