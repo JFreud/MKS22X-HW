@@ -8,6 +8,7 @@ public class QueenBoard {
 	bigness = size;
 	board = new int[size][size];
 	works = false;
+	solutionCount = -1;
     }
 
     private void addQueen(int r,int c) {
@@ -170,15 +171,13 @@ public class QueenBoard {
     }
 
     public int getSolutionCount() {
+	return solutionCount;
+    }
+    
+    public void countSolutions() {
 	clear();
 	solutionCount = 0;
-	boolean x = getSolCountH(0);
-	if (x) {
-	    //clear();
-	    //getSolCountH(0);
-	    return solutionCount;
-	}
-	return -1;
+	getSolCountH(0);
     }
 
 
@@ -208,6 +207,7 @@ public class QueenBoard {
     public static void main(String[] args) {
         QueenBoard test = new QueenBoard(8);
 	System.out.println();
+	test.countSolutions();
 	System.out.println();
 	System.out.println("8 x 8 board: " + test.solve());
 	System.out.println(test);
@@ -218,17 +218,21 @@ public class QueenBoard {
         System.out.println();
         System.out.println();
 	QueenBoard test2 = new QueenBoard(3);
+	test2.countSolutions();
 	System.out.println("3 x 3 board: " + test2.solve());
 	System.out.println(test2);
 	QueenBoard test3 = new QueenBoard(10);
+	test3.countSolutions();
 	System.out.println();
         System.out.println("10 x 10 board solutions: " + test3.getSolutionCount());
 	QueenBoard test4 = new QueenBoard(13);
+	test4.countSolutions();
 	System.out.println();
 	System.out.println("13 x 13 board solutions: " + test4.getSolutionCount());
 	System.out.println();
 	System.out.println();
 	QueenBoard test5 = new QueenBoard(1);
+	test5.countSolutions();
 	System.out.println("1 x 1: " + test.solve() );
 	System.out.println();
 	System.out.println("num solutions: " + test5.getSolutionCount());
