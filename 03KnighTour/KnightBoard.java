@@ -9,15 +9,16 @@ public class KnightBoard {
     }
     
     private boolean checkOpenFields(int r, int c) {
-	 return (board[r+2][c+1] == 0 ||
-		 board[r+2][c-1] == 0 ||
-		 board[r+1][c+2] == 0 ||
-		 board[r+1][c-2] == 0 ||
-		 board[r-2][c+1] == 0 ||
-		 board[r-2][c-1] == 0 ||
-		 board[r-1][c+2] == 0 ||
-		 board[r-1][c-2] == 0);
-    }
+	int[][] moves = new int{{2,1}, {2,-1}, {1,2}, {1,-2}, {-2,1}, {-2,-1}, {-1,2}, {-1,-2}};
+	for (int m = 0; m < moves.length; m++) {
+	    try {
+		board[r + moves[m][0]][c + moves[m][1]];
+		return true;
+	    }
+	    catch (ArrayIndexOutOfBoundsException e) {}
+	}
+	return false
+	    }
 
      public void solve() {
 	 solveH(0,0,0);
