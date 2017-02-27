@@ -25,31 +25,32 @@ public class KnightBoard {
     }
 
 
-     private ArrayList<int[]> getOpenFieldsDeep(int r, int c) {
-	ArrayList<int[]> validMoves = new ArrayList<int[]>();
-	ArrayList<int[]> nextMoves = new ArrayList<int[]>();
-	for (int m = 0; m < moves.length; m++) {
-	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
+    //  private ArrayList<int[]> getOpenFieldsDeep(int r, int c) {
+    // 	ArrayList<int[]> nextOpenFields;
+    // 	ArrayList<int[]> validMoves = new ArrayList<int[]>();
+    // 	ArrayList<int[]> nextMoves = new ArrayList<int[]>();
+    // 	for (int m = 0; m < moves.length; m++) {
+    // 	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
 		
-		nextOpenFields = getOpenFields(r + moves[m][0], c + moves[m][1]);
-	        validMoves.add(moves[m]);
-		nextMoves.add(nextOpenFields);
-	    }
-	}	
+    // 		nextOpenFields = getOpenFields(r + moves[m][0], c + moves[m][1]);
+    // 	        validMoves.add(moves[m]);
+    // 		nextMoves.add(nextOpenFields);
+    // 	    }
+    // 	}	
 	
-	return validMoves;
-    }
+    // 	return validMoves;
+    // }
 
-    private ArrayList<int[]> getOptimizedFields(int r, int c) {
-	ArrayList<int[]> validMoves = new ArrayList<int[]>();
-	for (int m = 0; m < moves.length; m++) {
-	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
-		validMoves.add(moves[m]);
-	    }
-	}	
+    // private ArrayList<int[]> getOptimizedFields(int r, int c) {
+    // 	ArrayList<int[]> validMoves = new ArrayList<int[]>();
+    // 	for (int m = 0; m < moves.length; m++) {
+    // 	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
+    // 		validMoves.add(moves[m]);
+    // 	    }
+    // 	}	
 	
-	return validMoves;
-    }
+    // 	return validMoves;
+    // }
 
 
     
@@ -131,9 +132,6 @@ public class KnightBoard {
 	for (int r = 0; r < board.length; r++) {
 	    out += "\n";
 	    for (int c = 0; c < board[r].length; c++) {
-		//if (board[r][c] == 0) {
-		//    out += sizeR * sizeC + " ";
-		//}
 		 if (board[r][c] < 10) {
 		    out += " " + board[r][c] + " ";
 		    }
@@ -148,7 +146,7 @@ public class KnightBoard {
 	KnightBoard test = new KnightBoard(4,3);
 	test.solve();
 	System.out.println(test);
-	KnightBoard test2 = new KnightBoard(3,3);
+	KnightBoard test2 = new KnightBoard(7,6);
 	test2.solve();
 	System.out.println(test2);
     }
