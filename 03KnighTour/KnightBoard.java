@@ -19,19 +19,77 @@ public class KnightBoard {
 	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
 		validMoves.add(moves[m]);
 	    }
-	}
+	}	
+	
 	return validMoves;
     }
 
 
+     private ArrayList<int[]> getOpenFieldsDeep(int r, int c) {
+	ArrayList<int[]> validMoves = new ArrayList<int[]>();
+	ArrayList<int[]> nextMoves = new ArrayList<int[]>();
+	for (int m = 0; m < moves.length; m++) {
+	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
+		
+		nextOpenFields = getOpenFields(r + moves[m][0], c + moves[m][1]);
+	        validMoves.add(moves[m]);
+		nextMoves.add(nextOpenFields);
+	    }
+	}	
+	
+	return validMoves;
+    }
+
+    private ArrayList<int[]> getOptimizedFields(int r, int c) {
+	ArrayList<int[]> validMoves = new ArrayList<int[]>();
+	for (int m = 0; m < moves.length; m++) {
+	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
+		validMoves.add(moves[m]);
+	    }
+	}	
+	
+	return validMoves;
+    }
+
+
+    
      public void solve() {
 	 if (!(solveH(0,0,1))) {
-	     System.out.println("hi");
+	     board = new int[sizeR][sizeC];
+	 }
+     }
+
+
+     public void solveFast() {
+	 if (!(solveHFast(0,0,1))) {
 	     board = new int[sizeR][sizeC];
 	 }
      }
 
      private boolean solveH (int row, int col, int level) {
+	 if (level > sizeR * sizeC) {
+	    return true;
+	}
+	
+	 ArrayList<int[]> validMoves = getOpenFields(row, col);
+	 if (board[row][col] == 0 && getOpenFields(row, col).size() > 0) {
+		     board[row][col] = level;
+		     for (int m = 0; m < validMoves.size(); m++) {
+			
+			 level++;
+			
+			 if (solveH (row + validMoves.get(m)[0], col + validMoves.get(m)[1], level)) {
+			     return true;
+			 }
+			 level--;
+		     }
+		     board[row][col] = 0;
+	 }
+	 //System.out.println(level);
+	 return false;
+     }
+
+     private boolean solveHFast (int row, int col, int level) {
 	 if (level > sizeR * sizeC) {
 	    return true;
 	}
@@ -90,7 +148,7 @@ public class KnightBoard {
 	KnightBoard test = new KnightBoard(4,3);
 	test.solve();
 	System.out.println(test);
-	KnightBoard test2 = new KnightBoard(6,6);
+	KnightBoard test2 = new KnightBoard(3,3);
 	test2.solve();
 	System.out.println(test2);
     }
