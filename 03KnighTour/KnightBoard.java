@@ -24,35 +24,6 @@ public class KnightBoard {
 	return validMoves;
     }
 
-
-    //  private ArrayList<int[]> getOpenFieldsDeep(int r, int c) {
-    // 	ArrayList<int[]> nextOpenFields;
-    // 	ArrayList<int[]> validMoves = new ArrayList<int[]>();
-    // 	ArrayList<int[]> nextMoves = new ArrayList<int[]>();
-    // 	for (int m = 0; m < moves.length; m++) {
-    // 	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
-		
-    // 		nextOpenFields = getOpenFields(r + moves[m][0], c + moves[m][1]);
-    // 	        validMoves.add(moves[m]);
-    // 		nextMoves.add(nextOpenFields);
-    // 	    }
-    // 	}	
-	
-    // 	return validMoves;
-    // }
-
-    // private ArrayList<int[]> getOptimizedFields(int r, int c) {
-    // 	ArrayList<int[]> validMoves = new ArrayList<int[]>();
-    // 	for (int m = 0; m < moves.length; m++) {
-    // 	    if (!(r + moves[m][0] < 0 || c + moves[m][1] < 0 || r + moves[m][0] >= sizeR || c + moves[m][1] >= sizeC)) {
-    // 		validMoves.add(moves[m]);
-    // 	    }
-    // 	}	
-	
-    // 	return validMoves;
-    // }
-
-
     
      public void solve() {
 	 if (!(solveH(0,0,1))) {
@@ -146,7 +117,7 @@ public class KnightBoard {
 	KnightBoard test = new KnightBoard(4,3);
 	test.solve();
 	System.out.println(test);
-	KnightBoard test2 = new KnightBoard(7,6);
+	KnightBoard test2 = new KnightBoard(6,6);
 	test2.solve();
 	System.out.println(test2);
     }
