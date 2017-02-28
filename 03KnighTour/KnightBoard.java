@@ -4,7 +4,7 @@ public class KnightBoard {
     private int[][] board;
     private int sizeR, sizeC;
     private int[][] moves = {{2,1}, {2,-1}, {1,2}, {1,-2}, {-2,1}, {-2,-1}, {-1,2}, {-1,-2}};
-    // private ArrayList<int[]> [][] validMovesArray = getMovesArray();
+    //private ArrayList<int[]> [][] validMovesArray = getMovesArray();
 
     
     public KnightBoard(int startingRows, int startingCols) {
@@ -61,12 +61,23 @@ public class KnightBoard {
     	int[][] boardMove = makeBoardMoves();
     	ArrayList<int[]> moves = getOpenFields(r,c);
 
+	//System.out.println(arrayToString(moves));
+	//System.out.println(moves.size());
     	for (int m = 0; m < moves.size(); m++) {
     	    min = m;
-    	    System.out.println(min);
+	    //System.out.println(arrayToString(moves));
+    	    //System.out.println(min);
     	    for (int j = m + 1; j < moves.size(); j++){
-    		System.out.println(min);
-    		if (boardMove[r + moves.get(min)[0]][ c + moves.get(min)[1]] > boardMove[r + moves.get(j)[0]][c + moves.get(j)[1]]) {
+    		//System.out.println(min);
+    		// System.out.println("row: " + r);
+    		// System.out.println("column: " +c);
+
+  		// System.out.println("moves min: " + boardMove[r + moves.get(min)[0]][ c + moves.get(min)[1]]);
+		// System.out.println("moves j: " + boardMove[r + moves.get(j)[0]][c + moves.get(j)[1]]);
+    		// System.out.println();
+
+		    
+		if (boardMove[r + moves.get(min)[0]][c + moves.get(min)[1]] > boardMove[r + moves.get(j)[0]][c + moves.get(j)[1]]) {
     		    min = j;
     		}
     	    }
@@ -74,7 +85,8 @@ public class KnightBoard {
     	    moves.set(min, moves.get(m));
     	    moves.set(m, temp);
     	}
-    	return moves;
+	// System.out.println(arrayToString(moves));
+	return moves;
     }
 
     
@@ -130,7 +142,7 @@ public class KnightBoard {
 			 
 			 level++;
 			
-			 if (solveH (row + validMoves.get(m)[0], col + validMoves.get(m)[1], level)) {
+			 if (solveHFast (row + validMoves.get(m)[0], col + validMoves.get(m)[1], level)) {
 			     return true;
 			 }
 			 level--;
@@ -182,17 +194,20 @@ public class KnightBoard {
     }
 
     public static void main(String[] args) {
-	KnightBoard test = new KnightBoard(4,3);
-	test.solve();
+	KnightBoard test = new KnightBoard(7,7);
+	test.solveFast();
 	System.out.println(test);
 	KnightBoard test2 = new KnightBoard(4,8);
 	test2.solve();
 	System.out.println(test2);
-	// System.out.println();
-	// int[][] moves = test2.makeBoardMoves();
-	// System.out.println(test2.Board2Print(moves));
-	// KnightBoard test3 = new KnightBoard(6,7);
-	// test3.solveFast();
-	// System.out.println(test3);
+	System.out.println();
+	int[][] moves = test2.makeBoardMoves();
+	System.out.println(test2.Board2Print(moves));
+	KnightBoard test3 = new KnightBoard(5,5);
+	test3.solveFast();
+	System.out.println(test3);
+	KnightBoard test4 = new KnightBoard(9,9);
+	test4.solveFast();
+	System.out.println(test4);
     }
 }
