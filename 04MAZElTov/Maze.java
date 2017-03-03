@@ -25,15 +25,23 @@ public class Maze{
 	Scanner sc;
 	try {
         sc = new Scanner(new File(filename));
+	while (sc.hasNext()) {
+	    premaze += sc.nextLine();
+	}
 	}
 	catch (FileNotFoundException e) {
 	    System.out.println("Error 404: File Not Found");
+	    System.exit(0);
 	}
-	while (sc.hasNext()) {
-	    premaze += sc.next();
-	}
+
+	System.out.println(premaze);
+
 	String[] mLines = premaze.split("\n");
 	maze = new char[mLines.length][mLines[0].length()];
+
+	System.out.println("row: " + maze.length);
+	System.out.println("column: " + maze.length);
+
 	for (int r = 0; r < maze.length; r++) {
 	    System.out.println("\n");
 	    char[] thisLine = mLines[r].toCharArray();
@@ -47,7 +55,7 @@ public class Maze{
     }
     
 
-    private void wait(int millis){ //ADDED SORRY!
+    private void wait(int millis){
          try {
              Thread.sleep(millis);
          }
@@ -79,9 +87,16 @@ public class Maze{
     public boolean solve(){
             int startr=-1,startc=-1;
 
-            //Initialize starting row and startint col with the location of the S. 
+            for (int r = 0; r < maze.length; r++) {
+		for (int c = 0; c < maze[r].length; c++) {
+		    if (maze[r][c] == 'S') {
+			startr = r;
+			startc = c;
+		    }
+		}
+	    }
 
-            maze[startr][startc] = ' ';//erase the S, and start solving!
+            maze[startr][startc] = ' ';
             return solve(startr,startc);
     }
 
@@ -108,9 +123,19 @@ public class Maze{
             wait(20);
         }
 
-        //COMPLETE SOLVE
+        if (maze[row][col] == 'E') {
+	    return true;
+	}
 
-        return false; //so it compiles
+	if (solve(row + 1, col) ||
+	    solve(row, col + 1) ||
+	    solve(row - 1, col) ||
+	    solve(row, col - 1))
+	    {
+	    return true;
+	}
+
+        return false;
     }
 
 
