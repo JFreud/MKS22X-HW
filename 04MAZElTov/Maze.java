@@ -26,7 +26,7 @@ public class Maze{
 	try {
         sc = new Scanner(new File(filename));
 	while (sc.hasNext()) {
-	    premaze += sc.nextLine();
+	    premaze += sc.nextLine() + "\n";
 	}
 	}
 	catch (FileNotFoundException e) {
@@ -34,20 +34,20 @@ public class Maze{
 	    System.exit(0);
 	}
 
-	System.out.println(premaze);
+	//System.out.println(premaze);
 
 	String[] mLines = premaze.split("\n");
 	maze = new char[mLines.length][mLines[0].length()];
 
-	System.out.println("row: " + maze.length);
-	System.out.println("column: " + maze.length);
+	//System.out.println("row: " + maze.length);
+	//System.out.println("column: " + maze.length);
 
 	for (int r = 0; r < maze.length; r++) {
-	    System.out.println("\n");
+	    System.out.println();
 	    char[] thisLine = mLines[r].toCharArray();
-	    for (int c = 0; c < maze.length; c++) {
+	    for (int c = 0; c < maze[r].length; c++) {
 		maze[r][c] = thisLine[c];
-		System.out.println(thisLine[c]);
+		//System.out.print(thisLine[c]);
 	    }
 	}
 
@@ -97,7 +97,7 @@ public class Maze{
 	    }
 
             maze[startr][startc] = ' ';
-            return solve(startr,startc);
+            return solveH(startr,startc);
     }
 
     /*
@@ -116,31 +116,89 @@ public class Maze{
         All visited spots that were not part of the solution are changed to '.'
         All visited spots that are part of the solution are changed to '@'
     */
-    private boolean solve(int row, int col){
+    private boolean solveH(int row, int col){
+	int[] dir = {-1, 1};
         if(animate){
             System.out.println("\033[2J\033[1;1H"+this);
 
             wait(20);
         }
+	
+	maze[row][col] = '@';
+	
+	for (int i = 0; i < dir.length; i ++) {
+	    if (row + dir[i] >= 0 &&
+		row + dir[i] < maze.length) {
 
-        if (maze[row][col] == 'E') {
-	    return true;
+		if (maze[row + dir[i]][col] == 'E') {
+		    return true;
+		}
+		
+		
+		if (maze[row + dir[i]][col] != '#' &&
+		    maze [row + dir[i]][col] != '@') {
+		    
+		    maze[row + dir[i]][col] = '@';
+		    if (solveH(row + dir[i], col)) {
+			return true;
+		    }
+		    else {
+			maze[row + dir[i]][col] = '.';
+		    }
+		    
+		}
+		
+	    }
+
+	    if (col + dir[i] >= 0 &&
+		col + dir[i] < maze[row].length) {
+
+        	if (maze[row][col + dir[i]] == 'E') {
+		    return true;
+		}
+		
+		if (maze[row][col + dir[i]] != '#' &&
+		    maze [row][col + dir[i]] != '@') {
+		    
+		    maze[row][col + dir[i]] = '@';
+		    if (solveH(row, col + dir[i])) {
+			return true;
+		    }
+		    else {
+			maze[row][col + dir[i]] = '.';
+		    }
+		    
+		}
+		
+	    }
 	}
-
-	if (solve(row + 1, col) ||
-	    solve(row, col + 1) ||
-	    solve(row - 1, col) ||
-	    solve(row, col - 1))
-	    {
-	    return true;
-	}
-
         return false;
+    }
+
+    public String toString() {
+	String out = "";
+	for (int r = 0; r < maze.length; r++) {
+	    out += "\n";
+	    for (int c = 0; c < maze[r].length; c++) {
+		out += maze[r][c];
+	    }
+	}
+	return out;
     }
 
 
 
     public static void main(String[] args) {
 	Maze test = new Maze("data1.dat");
+	test.setAnimate(true);
+	System.out.println(test.solve());
+	Maze test2 = new Maze("data2.dat");
+	test2.setAnimate(true);
+	//System.out.println(test2);
+	System.out.println(test2.solve());
+	Maze test3 = new Maze("data3.dat");
+	test3.setAnimate(true);
+	//System.out.println(test3);
+	System.out.println(test3.solve());
     }
 }
