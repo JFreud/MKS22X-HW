@@ -137,27 +137,52 @@ public class USACO {
     public void cowTravel(String fileName) {
 	ArrayList<Integer> inputNums = new ArrayList<Integer>();
 	ArrayList<String> field = new ArrayList<String>();
+	ArrayList<String> lines = new ArrayList<String>();
 	File file = new File(fileName);
 	Scanner sc;
 	try {
+	    // sc = new Scanner(file);
+	    // while (sc.hasNextInt()) {
+	    // 	inputNums.add(sc.nextInt());
+	    // }
+	    // sc.useDelimiter("");
+	    // while (sc.hasNext()) {
+	    // 	field.add(sc.next());
+	    // }
+
+	    // int toRemove = field.size() - 8;
+
+	    // inputNums.add(Integer.parseInt(field.remove(toRemove)));
+	    //  field.remove(toRemove);
+	    //  inputNums.add(Integer.parseInt(field.remove(toRemove)));
+	    //  field.remove(toRemove);
+	    //  inputNums.add(Integer.parseInt(field.remove(toRemove)));
+	    //  field.remove(toRemove);
+	    //  inputNums.add(Integer.parseInt(field.remove(toRemove)));
+
 	    sc = new Scanner(file);
-	    while (sc.hasNextInt()) {
-		inputNums.add(sc.nextInt());
+	    while (sc.hasNextLine()) {
+		lines.add( sc.nextLine());
 	    }
-	    sc.useDelimiter("");
-	    while (sc.hasNext()) {
-		field.add(sc.next());
+	    String thisLine;
+	    String[] numLine;
+	    for (int line = 0; line < lines.size(); line++) {
+		thisLine = lines.get(line);
+		thisLine.replaceAll("\\s+","");
+		if (line == 0 || line == lines.size() - 1) {
+		    numLine = thisLine.split(" ");
+		    for (int i = 0; i < numLine.length; i++) {
+			inputNums.add(Integer.parseInt(numLine[i]));
+		    }
+		}
+		else {
+		    for (int i = 0; i < thisLine.length(); i++) {
+			field.add("" + thisLine.charAt(i));
+		    }
+		}
+		    
 	    }
-
-	    int toRemove = field.size() - 8;
-
-	    inputNums.add(Integer.parseInt(field.remove(toRemove)));
-	     field.remove(toRemove);
-	     inputNums.add(Integer.parseInt(field.remove(toRemove)));
-	     field.remove(toRemove);
-	     inputNums.add(Integer.parseInt(field.remove(toRemove)));
-	     field.remove(toRemove);
-	     inputNums.add(Integer.parseInt(field.remove(toRemove)));
+		
 
 	     while (field.remove("\n")) {};
 	     
@@ -189,7 +214,7 @@ public class USACO {
 	    }
 	    ary1[start[0] - 1][start[1] - 1] = 1;
 	    
-	}
+		}
 	catch (FileNotFoundException e) {
 	    System.out.println("Error 404: File Not Found");
 	    System.exit(0);
@@ -256,6 +281,6 @@ public class USACO {
 	public static void main(String[] args){
 		USACO x= new USACO();
 		System.out.println (x.bronze("lake1.txt"));
-	        System.out.println(x.silver("ctravel.3.in"));
+	        System.out.println(x.silver("ctravel.10.in"));
 	}
 }
