@@ -42,10 +42,30 @@ public class Quick {
 	return out;
     }
 
+    public static int quickselect(int[] data, int k) {
+	int pivot;
+	for (int i = 0; i < data.length; i++) {
+	    pivot = part(data, 0, data.length);
+	    if (pivot == k) {
+		return data[k];
+	    }
+	    if (k < pivot) {
+		part(data, 0, pivot);
+	    }
+	    else {
+		part(data, pivot, data.length);
+	    }
+	}
+	return k;
+    }
+		
+
     public static void main(String[] args) {
-	int[] test = {999,999,999,4,1,0,3,2,999,999,999};
-	System.out.println(part(test, 0, test.length));
-	System.out.println(toString(test));
+	int[] test = { 2, 10, 15, 23, 0,  5};
+	System.out.println(quickselect(test, 0));
+	System.out.println(quickselect(test, 1));
+	System.out.println(quickselect(test, 2));
+	System.out.println(quickselect(test, 3));
     }
 
 }
