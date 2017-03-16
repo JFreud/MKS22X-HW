@@ -44,16 +44,18 @@ public class Quick {
 
     public static int quickselect(int[] data, int k) {
 	int pivot;
-	for (int i = 0; i < data.length; i++) {
-	    pivot = part(data, 0, data.length);
+	int start = 0;
+	int end = data.length;
+	while (start < end) {
+	    pivot = part(data, start, end);
 	    if (pivot == k) {
 		return data[k];
 	    }
 	    if (k < pivot) {
-		part(data, 0, pivot);
+	        end = pivot - 1;
 	    }
 	    else {
-		part(data, pivot, data.length);
+	        start = pivot + 1;
 	    }
 	}
 	return k;
@@ -66,6 +68,8 @@ public class Quick {
 	System.out.println(quickselect(test, 1));
 	System.out.println(quickselect(test, 2));
 	System.out.println(quickselect(test, 3));
+	System.out.println(quickselect(test, 4));
+	System.out.println(quickselect(test, 5));
     }
 
 }
