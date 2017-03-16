@@ -9,7 +9,6 @@ public class Quick {
     }
 
     public static int partH(int[] ary, int pivot, int start, int end) {
-	int temp;
 	int pivotVal = ary[pivot];
 	
 	swap(ary, pivot, end-1);
@@ -37,7 +36,7 @@ public class Quick {
     public static String toString(int[] ary) {
 	String out = "";
 	for (int i = 0; i < ary.length; i++) {
-	    out += ary[i];
+	    out += ary[i] + " ";
 	}
 	return out;
     }
@@ -64,12 +63,14 @@ public class Quick {
 
     public static void main(String[] args) {
 	int[] test = { 2, 10, 15, 23, 0,  5};
-	System.out.println(quickselect(test, 0));
-	System.out.println(quickselect(test, 1));
-	System.out.println(quickselect(test, 2));
-	System.out.println(quickselect(test, 3));
-	System.out.println(quickselect(test, 4));
-	System.out.println(quickselect(test, 5));
+	System.out.println(part(test, 0, test.length));
+	System.out.println(toString(test));
+	// System.out.println(quickselect(test, 0));
+	// System.out.println(quickselect(test, 1));
+	// System.out.println(quickselect(test, 2));
+	// System.out.println(quickselect(test, 3));
+	// System.out.println(quickselect(test, 4));
+	// System.out.println(quickselect(test, 5));
     }
 
 }
