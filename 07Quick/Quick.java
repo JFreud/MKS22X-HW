@@ -10,20 +10,30 @@ public class Quick {
 
     public static int partH(int[] ary, int pivot, int start, int end) {
 	int pivotVal = ary[pivot];
+	//System.out.println( "pivot: " + pivotVal);
 	
-	swap(ary, pivot, end);
+	swap(ary, pivot, start);
 
-	int toSwap = start;
-	for (int i = start; i < end; i++) {
-	    if (ary[i] < pivotVal) {
-		swap(ary, i, toSwap);
-		toSwap++;
+	int lt = start + 1;
+	int gt  = end - 1;
+	int i = start + 1;
+	while (i <= gt) {
+	    if (ary[i] == pivotVal){
+		i++;
+	    }
+	    else if (ary[i] < pivotVal) {
+		swap(ary, i, lt);
+		lt++;
+		i++;
+	    }
+	    else {
+		swap(ary, i, gt);
+		gt--;
 	    }
 	}
+	swap (ary, start, gt);
 
-	swap(ary, toSwap, end);
-
-	return toSwap;
+	return gt;
     }
 
     public static void swap(int[] ary, int indexA, int indexB) {
@@ -42,29 +52,31 @@ public class Quick {
     }
 
     public static int quickselect(int[] data, int k) {
-	return quickselectH(data, k, 0, data.length - 1);
+	return quickselectH(data, k, 0, data.length);
     }
 
     public static int quickselectH(int[] data, int k, int start, int end) {
 	if (start == end) {
 	    return data[start];
 	}
+	
 	int pivot = part(data, start, end);
+	
 	if (pivot == k) {
 	    return data[k];
 	}
-	if (k < pivot) {
+	else if (k < pivot) {
 	    return quickselectH(data, k, start, pivot - 1);
 	}
 	else {
-	    return quickselectH(data, k, pivot + 1, end);
+	    return quickselectH(data, k - pivot, pivot + 1, end);
 	}
     }
 	    
 		
 
     public static void main(String[] args) {
-	int[] test = { 2, 10};
+	int[] test = {2,10,15,23,0,5};
 	// System.out.println(part(test, 0, test.length));
 	// System.out.println(toString(test));
 
