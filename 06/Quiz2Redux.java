@@ -15,6 +15,9 @@ public class Quiz2Redux {
     
     public static void help(String s, ArrayList<String> words) {
 
+	if (s.length() == 0) {
+	    return;
+	}
 	if (s.length() == 1) {
 	    words.add(s);
 	    return;
@@ -58,7 +61,7 @@ public class Quiz2Redux {
 
 
     public static void main(String[] args) {
-	System.out.println(combinations("xotf"));
+	System.out.println(combinations(""));
     }
 
 
