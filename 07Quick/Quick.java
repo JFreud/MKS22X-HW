@@ -4,7 +4,7 @@ public class Quick {
     
     public static int part(int[] ary, int start, int end) {
 	Random thing = new Random();
-	int pivot = thing.nextInt(ary.length);
+	int pivot = thing.nextInt(end - start) + start;
 	return partH(ary, pivot, start, end);
     }
 
@@ -14,9 +14,9 @@ public class Quick {
 	
 	swap(ary, pivot, start);
 
-	int lt = start + 1;
+	int lt = start;
 	int gt  = end - 1;
-	int i = start + 1;
+	int i = start;
 	while (i <= gt) {
 	    if (ary[i] == pivotVal){
 		i++;
@@ -31,9 +31,9 @@ public class Quick {
 		gt--;
 	    }
 	}
-	swap (ary, start, gt);
+	//swap (ary, start, gt);
 
-	return gt;
+	return lt;
     }
 
     public static void swap(int[] ary, int indexA, int indexB) {
@@ -68,7 +68,7 @@ public class Quick {
 	if (pivot == k) {
 	    System.out.println("equal");
 	    for (int i : data) {
-		System.out.print(i);
+	    	System.out.print(i + " ");
 	    }
 	    System.out.println();
 	    return data[pivot];
@@ -76,7 +76,7 @@ public class Quick {
 	else if (k < pivot) {
 	    System.out.println("less than");
 	    for (int i : data) {
-		System.out.print(i);
+	    	System.out.print(i + " ");
 	    }
 	    System.out.println();
 	    return quickselectH(data, k, start, pivot);
@@ -84,10 +84,10 @@ public class Quick {
 	else {
 	    System.out.println("greater than");
 	    for (int i : data) {
-		System.out.print(i);
+	    	System.out.print(i + " ");
 	    }
 	    System.out.println();
-	    return quickselectH(data, k - pivot, pivot + 1, end);
+	    return quickselectH(data, pivot, pivot + 1, end);
 	}
     }
 	    
@@ -95,22 +95,22 @@ public class Quick {
 
     public static void main(String[] args) {
 	int[] test = {2, 10, 15, 23, 0,  5};
-	System.out.println(part(test, 0, 3));
-	System.out.println(toString(test));
+	// System.out.println(part(test, 0, test.length - 1));
+	// System.out.println(toString(test));
 
 
 	
-	// System.out.println(quickselect(test, 0));
-	// int[] test2 = { 2, 10, 15, 23, 0,  5};
-	// System.out.println(quickselect(test2, 1));
-	// int[] test3 = { 2, 10, 15, 23, 0,  5};
-	// System.out.println(quickselect(test3, 2));
-        // int[] test4 = { 2, 10, 15, 23, 0,  5};
-	// System.out.println(quickselect(test4, 3));
-	// int[] test5 = { 2, 10, 15, 23, 0,  5};
-	// System.out.println(quickselect(test5, 4));
-	// int[] test6 = { 2, 10, 15, 23, 0,  5};
-	// System.out.println(quickselect(test6, 5));
+	System.out.println(quickselect(test, 0));
+	int[] test2 = { 2, 10, 15, 23, 0,  5};
+	System.out.println(quickselect(test2, 1));
+	int[] test3 = { 2, 10, 15, 23, 0,  5};
+	System.out.println(quickselect(test3, 2));
+        int[] test4 = { 2, 10, 15, 23, 0,  5};
+	System.out.println(quickselect(test4, 3));
+	int[] test5 = { 2, 10, 15, 23, 0,  5};
+	System.out.println(quickselect(test5, 4));
+	int[] test6 = { 2, 10, 15, 23, 0,  5};
+	System.out.println(quickselect(test6, 5));
     }
 
 }
