@@ -57,6 +57,17 @@ public class MyLinkedList {
 	return toRet;
     }
 
+    public int indexOf (int val) {
+	LNode toCheck = start;
+	for (int i = 0; i < size - 1; i++) {
+	    if (toCheck.hereNum == val) {
+		return i;
+	    }
+	    toCheck = toCheck.next;
+	}
+	return -1;
+    }
+
     private class LNode {
 	int hereNum;
 	LNode next;
@@ -82,6 +93,8 @@ public class MyLinkedList {
 	System.out.println(test.get(2));
 	System.out.println(test.set(2, 10000));
 	System.out.println(test.get(2));
+	System.out.println(test.indexOf(10000));
+	System.out.println(test.indexOf(103000));
 	System.out.println(test);
     }
 	    
