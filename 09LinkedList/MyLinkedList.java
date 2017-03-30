@@ -47,6 +47,16 @@ public class MyLinkedList {
 	return toGet.hereNum;
     }
 
+    public int set(int index, int newVal) {
+	LNode toSet = start;
+	for (int i = 0; i < index; i++) {
+	    toSet = toSet.next;
+	}
+	int toRet = toSet.hereNum;
+	toSet.hereNum = newVal;
+	return toRet;
+    }
+
     private class LNode {
 	int hereNum;
 	LNode next;
@@ -69,6 +79,8 @@ public class MyLinkedList {
 	test.add(0);
 	test.add(-5);
 	System.out.println(test.size());
+	System.out.println(test.get(2));
+	System.out.println(test.set(2, 10000));
 	System.out.println(test.get(2));
 	System.out.println(test);
     }
