@@ -1,5 +1,5 @@
 
-
+//MAKE SURE TO WRITE EXCEPTIONS
 public class MyLinkedList {
     private LNode start;
     private LNode end;
@@ -67,6 +67,16 @@ public class MyLinkedList {
 	}
 	return -1;
     }
+
+    public void add(int index, int value) {
+	LNode toAdd = start;
+	for (int i = 0; i < index - 1; i++) {
+	    toAdd = toAdd.next;
+	}
+	LNode temp = toAdd.next;
+	toAdd.next = new LNode (value, temp);
+    }
+	
 
     private class LNode {
 	int hereNum;
