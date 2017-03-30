@@ -2,6 +2,7 @@
 
 public class MyLinkedList {
     private LNode start;
+    private LNode end;
     private int size;
 
     // public MyLinkedList() {
@@ -11,12 +12,27 @@ public class MyLinkedList {
     
     public MyLinkedList(int val) {
 	start = new LNode(val);
+	end = start;
 	size = 1;
     }
 
     public boolean add(int val) {
-	start = new LNode(val, start);
+	// start = new LNode(val, start);
+	end.next = new LNode(val); 
+	end = end.next;
+	size++;
 	return true;
+    }
+
+    public String toString() {
+	String out = "[";
+	LNode current = start;
+	while (current.next != null) {
+	    out += current.hereNum + ", ";
+	    current = current.next;
+	}
+	out += current.hereNum + "]";
+	return out;
     }
     
 
@@ -24,11 +40,11 @@ public class MyLinkedList {
 
     private class LNode {
 	int hereNum;
-	LNode thereNode;
+	LNode next;
 
 	public LNode(int num, LNode nextNode) {
 	    hereNum = num;
-	    thereNode = nextNode;
+	    next = nextNode;
 	}
 
 	public LNode (int num) {
@@ -39,6 +55,11 @@ public class MyLinkedList {
 
     public static void main(String[] args) {
 	MyLinkedList test = new MyLinkedList(10);
+	test.add(11);
+	test.add(13);
+	test.add(0);
+	test.add(-5);
+	System.out.println(test);
     }
 	    
 }
