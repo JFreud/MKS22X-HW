@@ -24,6 +24,10 @@ public class MyLinkedList {
 	return true;
     }
 
+    public int size() {
+	return size;
+    }
+
     public String toString() {
 	String out = "[";
 	LNode current = start;
@@ -35,8 +39,13 @@ public class MyLinkedList {
 	return out;
     }
     
-
-
+    public int get(int index) {
+	LNode toGet = start;
+	for (int i = 0; i < index; i++) {
+	    toGet = toGet.next;
+	}
+	return toGet.hereNum;
+    }
 
     private class LNode {
 	int hereNum;
@@ -59,6 +68,8 @@ public class MyLinkedList {
 	test.add(13);
 	test.add(0);
 	test.add(-5);
+	System.out.println(test.size());
+	System.out.println(test.get(2));
 	System.out.println(test);
     }
 	    
