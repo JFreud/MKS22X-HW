@@ -5,10 +5,12 @@ public class MyLinkedList {
     private LNode end;
     private int size;
 
-    // public MyLinkedList() {
-    // 	start = new LNode();
-    // 	size = 1;
-    // }
+
+    public MyLinkedList() {
+     	start = null;
+    	end = start;
+    	size = 0;
+    }
     
     public MyLinkedList(int val) {
 	start = new LNode(val);
@@ -18,7 +20,13 @@ public class MyLinkedList {
 
     public boolean add(int val) {
 	// start = new LNode(val, start);
-	end.next = new LNode(val); 
+	if (size == 0) {
+	    start = new LNode(val);
+	    end = start;
+	    size++;
+	    return true;
+	}
+	end.next = new LNode(val, null); 
 	end = end.next;
 	size++;
 	return true;
@@ -29,6 +37,9 @@ public class MyLinkedList {
     }
 
     public String toString() {
+	if (size == 0) {
+	    return "[]";
+	}
 	String out = "[";
 	LNode current = start;
 	while (current.next != null) {
@@ -75,6 +86,18 @@ public class MyLinkedList {
 	}
 	LNode temp = toAdd.next;
 	toAdd.next = new LNode (value, temp);
+	size++;
+    }
+
+    public int remove(int index) {
+	LNode track = start;
+	for (int i = 0; i < index - 1; i++) {
+	    track = track.next;
+	}
+	int retVal = track.next.hereNum;
+	track.next = track.next.next;
+	size--;
+	return retVal;
     }
 	
 
@@ -90,11 +113,13 @@ public class MyLinkedList {
 	public LNode (int num) {
 	    hereNum = num;
 	}
+
     }
 	    
 
     public static void main(String[] args) {
-	MyLinkedList test = new MyLinkedList(10);
+	MyLinkedList test = new MyLinkedList();
+	System.out.println(test);
 	test.add(11);
 	test.add(13);
 	test.add(0);
@@ -106,6 +131,12 @@ public class MyLinkedList {
 	System.out.println(test.indexOf(10000));
 	System.out.println(test.indexOf(103000));
 	System.out.println(test);
+	test.add(2, 100);
+	System.out.println(test);
+	System.out.println(test.size());
+	test.remove(2);
+	System.out.println(test);
+	System.out.println(test.size());
     }
 	    
 }
