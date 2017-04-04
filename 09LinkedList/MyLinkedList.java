@@ -26,7 +26,8 @@ public class MyLinkedList {
 	    size++;
 	    return true;
 	}
-	end.next = new LNode(val, null); 
+	end.next = new LNode(val, null);
+	end.next.prev = end;
 	end = end.next;
 	size++;
 	return true;
@@ -86,16 +87,21 @@ public class MyLinkedList {
 	}
 	LNode temp = toAdd.next;
 	toAdd.next = new LNode (value, temp);
+	toAdd.next.prev = toAdd;
 	size++;
     }
 
     public int remove(int index) {
+	if (index >= size) {
+	    throw new IndexOutOfBoundsException("no elements");
+	}
 	LNode track = start;
 	for (int i = 0; i < index - 1; i++) {
 	    track = track.next;
 	}
 	int retVal = track.next.hereNum;
 	track.next = track.next.next;
+	track.next.prev = track;
 	size--;
 	return retVal;
     }
@@ -104,6 +110,7 @@ public class MyLinkedList {
     private class LNode {
 	int hereNum;
 	LNode next;
+	LNode prev;
 
 	public LNode(int num, LNode nextNode) {
 	    hereNum = num;
