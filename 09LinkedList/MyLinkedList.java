@@ -12,11 +12,11 @@ public class MyLinkedList {
     	size = 0;
     }
     
-    public MyLinkedList(int val) {
-	start = new LNode(val);
-	end = start;
-	size = 1;
-    }
+    // public MyLinkedList(int val) {
+    // 	start = new LNode(val);
+    // 	end = start;
+    // 	size = 1;
+    // }
 
     public boolean add(int val) {
 	// start = new LNode(val, start);
@@ -28,6 +28,7 @@ public class MyLinkedList {
 	}
 	end.next = new LNode(val, null);
 	end.next.prev = end;
+	//System.out.println(end.next.prev.hereNum);
 	end = end.next;
 	size++;
 	return true;
@@ -105,6 +106,20 @@ public class MyLinkedList {
 	size--;
 	return retVal;
     }
+
+    public String reverseTest () {
+	String out = "[";
+	LNode current = end;
+	while (current.prev != null) {
+	    //System.out.println(current.prev.hereNum);
+	    out += current.hereNum + ", ";
+	    current = current.prev;
+	}
+	out += current.hereNum + "]";
+	return out;
+    }
+
+   
 	
 
     private class LNode {
@@ -126,24 +141,29 @@ public class MyLinkedList {
 
     public static void main(String[] args) {
 	MyLinkedList test = new MyLinkedList();
-	System.out.println(test);
+	//System.out.println(test);
 	test.add(11);
 	test.add(13);
 	test.add(0);
 	test.add(-5);
-	System.out.println(test.size());
-	System.out.println(test.get(2));
+	test.add(1000);
+	// System.out.println(test);
+	// System.out.println(test.reverseTest());
+	// System.out.println(test.size());
+	// System.out.println(test.reverseTest());
+	// System.out.println(test.get(2));
 	System.out.println(test.set(2, 10000));
-	System.out.println(test.get(2));
-	System.out.println(test.indexOf(10000));
-	System.out.println(test.indexOf(103000));
-	System.out.println(test);
+	// System.out.println(test.get(2));
+	// System.out.println(test.indexOf(10000));
+	// System.out.println(test.indexOf(103000));
+	// System.out.println(test);
 	test.add(2, 100);
 	System.out.println(test);
 	System.out.println(test.size());
-	test.remove(2);
+	test.remove(1);
 	System.out.println(test);
 	System.out.println(test.size());
+	System.out.println(test.reverseTest());
     }
 	    
 }
