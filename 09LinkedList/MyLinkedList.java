@@ -39,16 +39,41 @@ public class MyLinkedList {
     }
 
     public String toString() {
+	// if (size == 0) {
+	//     return "[]";
+	// }
+	// String out = "[";
+	// LNode current = start;
+	// while (current.next != null) {
+	//     out += current.hereNum + ", ";
+	//     current = current.next;
+	// }
+	// out += current.hereNum + "]";
+	// return out;
+
 	if (size == 0) {
 	    return "[]";
 	}
 	String out = "[";
 	LNode current = start;
 	while (current.next != null) {
-	    out += current.hereNum + ", ";
+	    if (current.prev == null) {
+		out += "(null)";
+	    }
+	    else {
+		out += "(" + current.prev.hereNum + ")";
+	    }
+	    out += current.hereNum;
+	    out += "(" + current.next.hereNum + "), ";
 	    current = current.next;
 	}
-	out += current.hereNum + "]";
+	if (current.prev == null) {
+	    out += "(null)";
+	}
+	else {
+	    out += "(" + current.prev.hereNum + ")";
+	}
+	out += current.hereNum + "(null)]";
 	return out;
     }
     
@@ -89,6 +114,7 @@ public class MyLinkedList {
 	LNode temp = toAdd.next;
 	toAdd.next = new LNode (value, temp);
 	toAdd.next.prev = toAdd;
+	toAdd.next.next.prev = toAdd.next;
 	size++;
     }
 
@@ -102,7 +128,10 @@ public class MyLinkedList {
 	}
 	int retVal = track.next.hereNum;
 	track.next = track.next.next;
+	System.out.println("next.prev b4:" + track.next.prev.hereNum);
 	track.next.prev = track;
+	System.out.println("next:" + track.next.hereNum);
+	System.out.println("next.prev aft:" + track.next.prev.hereNum);
 	size--;
 	return retVal;
     }
