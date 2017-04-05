@@ -122,6 +122,14 @@ public class MyLinkedList {
 	if (index >= size) {
 	    throw new IndexOutOfBoundsException("no elements");
 	}
+	if (index == 0) {
+	    start.next.prev = null;
+	    start = start.next;
+	}
+	if (index == size - 1) {
+	    end.prev.next = null;
+	    end = end.prev;
+	}
 	LNode track = start;
 	for (int i = 0; i < index - 1; i++) {
 	    track = track.next;
