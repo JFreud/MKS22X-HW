@@ -119,6 +119,7 @@ public class MyLinkedList {
     }
 
     public int remove(int index) {
+	int retVal;
 	if (index >= size) {
 	    throw new IndexOutOfBoundsException("no elements");
 	}
@@ -127,14 +128,17 @@ public class MyLinkedList {
 	    start = start.next;
 	}
 	if (index == size - 1) {
-	    end.prev.next = null;
+	    retVal = end.hereNum;
 	    end = end.prev;
+	    end.next = null;
+	    size--;
+	    return retVal;
 	}
 	LNode track = start;
 	for (int i = 0; i < index - 1; i++) {
 	    track = track.next;
 	}
-	int retVal = track.next.hereNum;
+	retVal = track.next.hereNum;
 	track.next = track.next.next;
 	System.out.println("next.prev b4:" + track.next.prev.hereNum);
 	track.next.prev = track;
@@ -189,15 +193,15 @@ public class MyLinkedList {
 	// System.out.println(test.size());
 	// System.out.println(test.reverseTest());
 	// System.out.println(test.get(2));
-	System.out.println(test.set(2, 10000));
-	// System.out.println(test.get(2));
-	// System.out.println(test.indexOf(10000));
-	// System.out.println(test.indexOf(103000));
-	// System.out.println(test);
-	test.add(2, 100);
+	// System.out.println(test.set(2, 10000));
+	// // System.out.println(test.get(2));
+	// // System.out.println(test.indexOf(10000));
+	// // System.out.println(test.indexOf(103000));
+	// // System.out.println(test);
+	// test.add(2, 100);
 	System.out.println(test);
 	System.out.println(test.size());
-	test.remove(1);
+	test.remove(test.size() - 1);
 	System.out.println(test);
 	System.out.println(test.size());
 	System.out.println(test.reverseTest());
