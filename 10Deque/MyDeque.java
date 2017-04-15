@@ -148,6 +148,7 @@ public class MyDeque {
 	test.addLast("two");
 	test.addLast("three");
 	test.addFirst("one");
+	test.addFirst("zero");
 	System.out.println(test);
 	
     }
