@@ -70,42 +70,42 @@ public class MyLinkedList implements Iterable<MyLinkedList.LNode> {
     }
 
     public String toString() {
-	// if (size == 0) {
-	//     return "[]";
-	// }
-	// String out = "[";
-	// LNode current = start;
-	// while (current.next != null) {
-	//     out += current.hereNum + ", ";
-	//     current = current.next;
-	// }
-	// out += current.hereNum + "]";
-	// return out;
-
 	if (size == 0) {
 	    return "[]";
 	}
 	String out = "[";
 	LNode current = start;
 	while (current.next != null) {
-	    if (current.prev == null) {
-		out += "(null)";
-	    }
-	    else {
-		out += "(" + current.prev.hereNum + ")";
-	    }
-	    out += current.hereNum;
-	    out += "(" + current.next.hereNum + "), ";
+	    out += current.hereNum + ", ";
 	    current = current.next;
 	}
-	if (current.prev == null) {
-	    out += "(null)";
-	}
-	else {
-	    out += "(" + current.prev.hereNum + ")";
-	}
-	out += current.hereNum + "(null)]";
+	out += current.hereNum + "]";
 	return out;
+
+	// if (size == 0) {
+	//     return "[]";
+	// }
+	// String out = "[";
+	// LNode current = start;
+	// while (current.next != null) {
+	//     if (current.prev == null) {
+	// 	out += "(null)";
+	//     }
+	//     else {
+	// 	out += "(" + current.prev.hereNum + ")";
+	//     }
+	//     out += current.hereNum;
+	//     out += "(" + current.next.hereNum + "), ";
+	//     current = current.next;
+	// }
+	// if (current.prev == null) {
+	//     out += "(null)";
+	// }
+	// else {
+	//     out += "(" + current.prev.hereNum + ")";
+	// }
+	// out += current.hereNum + "(null)]";
+	// return out;
     }
     
     public int get(int index) {
@@ -249,7 +249,7 @@ public class MyLinkedList implements Iterable<MyLinkedList.LNode> {
 	//     System.out.println(l.hereNum);
 	// }
 
-	// System.out.println(test);
+	System.out.println(test);
 	// System.out.println(test.indexOf(11));
 	
     }
