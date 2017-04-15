@@ -118,33 +118,37 @@ public class MyDeque {
 
     public static void main(String[] args) {
 	MyDeque test = new MyDeque(10);
-	//System.out.println(test);
-	test.addFirst("two");
-	//System.out.println(test);
-	test.addFirst("one");
-	//System.out.println(test);
+	// //System.out.println(test);
+	// test.addFirst("two");
+	// //System.out.println(test);
+	// test.addFirst("one");
+	// //System.out.println(test);
+	// test.addLast("three");
+	// test.addLast("four");
+	// // System.out.println(test);
+	// // System.out.println(test.getFirst());
+	// // System.out.println(test.getLast());
+	// System.out.println(test.removeFirst());
+	// System.out.println(test.removeLast());
+	// // System.out.println();
+	// // System.out.println(test.getFirst());
+	// // System.out.println(test.getLast());
+	// // System.out.println(test);
+	// // System.out.println(test.getFirst());
+	// // System.out.println(test.getLast());
+	// for (int i = 0; i < 15; i++) {
+	//     test.addFirst("one hunna");
+	// }
+	// System.out.println(test);
+	// test.addLast("last");
+	// test.addFirst("first");
+	// System.out.println(test);
+        // System.out.println(test.getFirst());
+	// System.out.println(test.getLast());
+	test.addLast("two");
 	test.addLast("three");
-	test.addLast("four");
-	// System.out.println(test);
-	// System.out.println(test.getFirst());
-	// System.out.println(test.getLast());
-	System.out.println(test.removeFirst());
-	System.out.println(test.removeLast());
-	// System.out.println();
-	// System.out.println(test.getFirst());
-	// System.out.println(test.getLast());
-	// System.out.println(test);
-	// System.out.println(test.getFirst());
-	// System.out.println(test.getLast());
-	for (int i = 0; i < 15; i++) {
-	    test.addFirst("one hunna");
-	}
+	test.addFirst("one");
 	System.out.println(test);
-	test.addLast("last");
-	test.addFirst("first");
-	System.out.println(test);
-        System.out.println(test.getFirst());
-	System.out.println(test.getLast());
 	
     }
 
