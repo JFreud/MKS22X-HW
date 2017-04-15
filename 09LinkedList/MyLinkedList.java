@@ -1,6 +1,6 @@
+import java.util.*;
 
-//MAKE SURE TO WRITE EXCEPTIONS
-public class MyLinkedList {
+public class MyLinkedList implements Iterable<MyLinkedList.LNode> {
     private LNode start;
     private LNode end;
     private int size;
@@ -11,12 +11,43 @@ public class MyLinkedList {
     	end = start;
     	size = 0;
     }
+
+    public Iterator<LNode> iterator() {
+	return new LinkedListerator();
+    }
+
+    private class LinkedListerator implements Iterator<LNode> {
+	LNode nextL;
+
+	public LinkedListerator() {
+	    nextL = start;
+	}
+
+	public boolean hasNext() {
+	    if (nextL != null) {
+		return true;
+	    }
+	    return false;
+	}
+
+	public LNode next() {
+	    if (nextL != null) {
+		LNode toRet = nextL;
+		nextL = nextL.next;
+		return toRet;
+	    }
+	    throw new NoSuchElementException();
+	}
+
+	public void remove() {
+	    throw new UnsupportedOperationException();
+	}
+    }
+	    
+	
     
-    // public MyLinkedList(int val) {
-    // 	start = new LNode(val);
-    // 	end = start;
-    // 	size = 1;
-    // }
+
+    
 
     public boolean add(int val) {
 	// start = new LNode(val, start);
@@ -78,6 +109,9 @@ public class MyLinkedList {
     }
     
     public int get(int index) {
+	if (index >= size || index < 0) {
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode toGet = start;
 	for (int i = 0; i < index; i++) {
 	    toGet = toGet.next;
@@ -86,6 +120,9 @@ public class MyLinkedList {
     }
 
     public int set(int index, int newVal) {
+	if (index >= size || index < 0) {
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode toSet = start;
 	for (int i = 0; i < index; i++) {
 	    toSet = toSet.next;
@@ -97,7 +134,7 @@ public class MyLinkedList {
 
     public int indexOf (int val) {
 	LNode toCheck = start;
-	for (int i = 0; i < size - 1; i++) {
+	for (int i = 0; i < size; i++) {
 	    if (toCheck.hereNum == val) {
 		return i;
 	    }
@@ -107,6 +144,9 @@ public class MyLinkedList {
     }
 
     public void add(int index, int value) {
+	if (index >= size || index < 0) {
+	    throw new IndexOutOfBoundsException();
+	}
 	LNode toAdd = start;
 	for (int i = 0; i < index - 1; i++) {
 	    toAdd = toAdd.next;
@@ -120,12 +160,15 @@ public class MyLinkedList {
 
     public int remove(int index) {
 	int retVal;
-	if (index >= size) {
-	    throw new IndexOutOfBoundsException("no elements");
+	if (index >= size || index < 0) {
+	    throw new IndexOutOfBoundsException();
 	}
 	if (index == 0) {
-	    start.next.prev = null;
+	    retVal = start.hereNum;
 	    start = start.next;
+	    start.prev = null;
+	    size--;
+	    return retVal;
 	}
 	if (index == size - 1) {
 	    retVal = end.hereNum;
@@ -140,30 +183,20 @@ public class MyLinkedList {
 	}
 	retVal = track.next.hereNum;
 	track.next = track.next.next;
-	System.out.println("next.prev b4:" + track.next.prev.hereNum);
+	// System.out.println("next.prev b4:" + track.next.prev.hereNum);
 	track.next.prev = track;
-	System.out.println("next:" + track.next.hereNum);
-	System.out.println("next.prev aft:" + track.next.prev.hereNum);
+	// System.out.println("next:" + track.next.hereNum);
+	// System.out.println("next.prev aft:" + track.next.prev.hereNum);
 	size--;
 	return retVal;
     }
 
-    public String reverseTest () {
-	String out = "[";
-	LNode current = end;
-	while (current.prev != null) {
-	    //System.out.println(current.prev.hereNum);
-	    out += current.hereNum + ", ";
-	    current = current.prev;
-	}
-	out += current.hereNum + "]";
-	return out;
-    }
+
 
    
 	
 
-    private class LNode {
+    public class LNode {
 	int hereNum;
 	LNode next;
 	LNode prev;
@@ -175,6 +208,10 @@ public class MyLinkedList {
 
 	public LNode (int num) {
 	    hereNum = num;
+	}
+
+	public String toString() {
+	    return hereNum + "";
 	}
 
     }
@@ -199,12 +236,22 @@ public class MyLinkedList {
 	// // System.out.println(test.indexOf(103000));
 	// // System.out.println(test);
 	// test.add(2, 100);
-	System.out.println(test);
-	System.out.println(test.size());
-	test.remove(test.size() - 1);
-	System.out.println(test);
-	System.out.println(test.size());
-	System.out.println(test.reverseTest());
+	// System.out.println(test);
+	// System.out.println(test.size());
+	// test.remove(test.size() - 1);
+	// //test.remove(0);
+	// System.out.println(test);
+	// System.out.println(test.size());
+	// test.remove(0);
+	// System.out.println(test);
+	// System.out.println(test.size());
+	// for (LNode l : test) {
+	//     System.out.println(l.hereNum);
+	// }
+
+	// System.out.println(test);
+	// System.out.println(test.indexOf(11));
+	
     }
 	    
 }
