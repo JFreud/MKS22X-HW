@@ -29,11 +29,6 @@ public class MyDeque {
 	    temp[i] = deque[(front + 1 + i) % capacity];
 	}
 
-	for (String s : temp) {
-	    System.out.print(s + ",");
-	}
-	System.out.println();
-
 	deque = new String[temp.length];
 	capacity = capacity * 2;
 	front = capacity - 1;
@@ -45,32 +40,6 @@ public class MyDeque {
 
     }
 
-
-	// String[] temp = new String[capacity * 2];
-	// System.out.println("front = " + front);
-        // for (String s : deque) {
-	//     System.out.print(s + ",");
-	// }
-	// System.out.println();
-	// for (int i = 0; i < size; i++) {
-	//     //System.out.println(size);
-	//     //System.out.println("next: " + deque[(front - 1 + i) % capacity]);
-	//     temp[i] = deque[(front - 1 + i) % capacity];
-	// }
-	// deque = new String[temp.length];
-	// capacity = capacity * 2;
-	// front = capacity - 1;
-	// back = size;
-
-	// for (int i = 0; i < size; i++) {
-	//     deque[i] = temp[i];
-	// }
-	
-	// for (String s : temp) {
-	//     System.out.print(s + ",");
-	// }
-	// System.out.println();
-	// deque = Arrays.copyOf(temp, temp.length);
 
     public void addLast(String s) {
 	if (size == capacity) {
@@ -145,12 +114,25 @@ public class MyDeque {
 	// System.out.println(test);
         // System.out.println(test.getFirst());
 	// System.out.println(test.getLast());
-	test.addLast("two");
-	test.addLast("three");
-	test.addFirst("one");
-	test.addFirst("zero");
+	// test.addLast("two");
+	// test.addLast("three");
+	// test.addFirst("one");
+	// test.addFirst("zero");
+	// System.out.println(test.getLast());
+	// System.out.println(test.getFirst());
+	// System.out.println(test);
+
+	for (int i = 0; i < 100; i++) {
+	    test.addLast(i + "");
+	}
+	for (int i = 200; i > 100; i--) {
+	    test.addFirst(i + "");
+	}
+	test.removeFirst();
+	test.removeLast();
+	System.out.println(test.getLast());
+	System.out.println(test.getFirst());
 	System.out.println(test);
-	
     }
 
 }
