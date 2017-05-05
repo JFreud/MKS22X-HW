@@ -4,12 +4,20 @@ public class MyHeap {
     boolean isMax = true;
     ArrayList<String> heapThing;
 
-    MyHeap() {
+    public MyHeap() {
 	heapThing = new ArrayList<String>();
+	heapThing.add(""); //temp
     }
 
-    MyHeap(boolean ifMax) {
+    public MyHeap(boolean ifMax) {
 	isMax = ifMax;
+	heapThing = new ArrayList<String>();
+	if (isMax){
+	    heapThing.add("");
+	}
+	else {
+	    heapThing.add("~~~~~~~~~"); //temp
+	}
     }
 
     private void pushUp(int index) {
@@ -20,7 +28,7 @@ public class MyHeap {
     }
 
     private void pushDown(int index) {
-	if (index * 2 < index * 2 + 1) {
+	if (heapThing.get(index * 2).compareTo(heapThing.get(index * 2 + 1)) < 0) {
 	    index = index * 2 + 1;
 	}
 	else {
@@ -29,8 +37,45 @@ public class MyHeap {
         pushUp(index);
     }
 
-    void add(String s) {
+    public void add(String s) {
 	heapThing.add(s);
-	while (s.compareTo(heapThing.get(heapThing.lastIndexOf(s) / 2)) > 0) {
-	    
+	if (heapThing.size() == 2) {
+	    return;
+	}
+	if (isMax) {
+	    while (s.compareTo(heapThing.get(heapThing.lastIndexOf(s) / 2)) <= 0) {
+		pushUp(heapThing.lastIndexOf(s));
+	    }
+	} else {
+	    while (s.compareTo(heapThing.get(heapThing.lastIndexOf(s) / 2)) > 0) {
+		pushUp(heapThing.lastIndexOf(s));
+	    }
+	}
     }
+
+    public String remove() {
+	return heapThing.remove(heapThing.size() - 1);
+    }
+
+    public String peek() {
+	return heapThing.get(heapThing.size() - 1);
+    }
+
+    public String toString() {
+	String out = "[";
+	for (int i = 1; i < heapThing.size(); i++) {
+	    out += heapThing.get(i) + ", ";
+	}
+	return out.substring(0, out.length() - 2) + "]";
+    }
+
+    public static void main(String[] args) {
+	MyHeap test = new MyHeap();
+	test.add("potato");
+	test.add("potatoa");
+	test.add("potatoaa");
+	System.out.println(test);
+	
+    }
+}
+    
