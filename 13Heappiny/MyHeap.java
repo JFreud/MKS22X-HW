@@ -79,7 +79,7 @@ public class MyHeap {
 		heapThing.set(index, temp);
 	    }
 
-	    while (!(index > (heapThing.size() - 1) / 2) && (value.compareTo(heapThing.get(index * 2)) > 0 || value.compareTo(heapThing.get(index * 2 + 1)) > 0)){
+	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) > 0 || value.compareTo(heapThing.get(index * 2 + 1)) > 0)){
 		String child1 = heapThing.get(index * 2);
 		String child2 = heapThing.get(index * 2 + 1);
 		if (child1.compareTo(child2) >= 0){ 
@@ -134,8 +134,9 @@ public class MyHeap {
     }
 
     public static void main(String[] args) {
-	MyHeap test = new MyHeap(false);
+	MyHeap test = new MyHeap();
 	test.add("potato");
+	test.remove();
 	test.add("potatoa");
 	test.add("potatoaa");
 	System.out.println(test);
