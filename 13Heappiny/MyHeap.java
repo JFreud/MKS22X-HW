@@ -18,34 +18,85 @@ public class MyHeap {
     private void pushUp(int index) {
 	String temp;
 	String value = heapThing.get(index);
-	while (index != 1 && value.compareTo(heapThing.get(index / 2)) > 0) {
-	    temp = heapThing.get(index / 2);
-	    heapThing.set(index / 2, heapThing.get(index));
-	    heapThing.set(index, temp);
-	    index = index / 2;
-	}	
+
+	if(isMax) {
+	    
+	    while (index != 1 && value.compareTo(heapThing.get(index / 2)) > 0) {
+		temp = heapThing.get(index / 2);
+		heapThing.set(index / 2, heapThing.get(index));
+		heapThing.set(index, temp);
+		index = index / 2;
+	    }
+	}
+
+	else {
+
+	    while (index != 1 && value.compareTo(heapThing.get(index / 2)) < 0) {
+		temp = heapThing.get(index / 2);
+		heapThing.set(index / 2, heapThing.get(index));
+		heapThing.set(index, temp);
+		index = index / 2;
+	    }
+	}
     }
 
     private void pushDown(int index) {
 	String value = heapThing.get(index);
 	String temp;
 	int newIndex;
-        while (!(index > (heapThing.size() - 1) / 2) && (value.compareTo(heapThing.get(index * 2)) < 0 || value.compareTo(heapThing.get(index * 2 + 1)) < 0)){
-	    String child1 = heapThing.get(index * 2);
-	    String child2 = heapThing.get(index * 2 + 1);
-	    if (child1.compareTo(child2) <= 0){ 
-		temp = child2;
-		heapThing.set(index * 2 + 1, value);
-		newIndex = index * 2 + 1;
-	    }
-	    else {
-		temp = child1;
+
+	if (isMax) {
+	    
+	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) < 0) { //if heap ends with only one child
+		temp = heapThing.get(index * 2);
 		heapThing.set(index * 2, value);
-		newIndex = index * 2;
+		heapThing.set(index, temp);
 	    }
-	    heapThing.set(index, temp);
-	    index = newIndex;
+	    
+	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) < 0 || value.compareTo(heapThing.get(index * 2 + 1)) < 0)){
+		String child1 = heapThing.get(index * 2);
+		String child2 = heapThing.get(index * 2 + 1);
+		if (child1.compareTo(child2) <= 0){ 
+		    temp = child2;
+		    heapThing.set(index * 2 + 1, value);
+		    newIndex = index * 2 + 1;
+		}
+		else {
+		    temp = child1;
+		    heapThing.set(index * 2, value);
+		    newIndex = index * 2;
+		}
+		heapThing.set(index, temp);
+		index = newIndex;
+	    }
 	}
+
+	else {
+
+	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) > 0) { //if heap ends with only one child
+		temp = heapThing.get(index * 2);
+		heapThing.set(index * 2, value);
+		heapThing.set(index, temp);
+	    }
+
+	    while (!(index > (heapThing.size() - 1) / 2) && (value.compareTo(heapThing.get(index * 2)) > 0 || value.compareTo(heapThing.get(index * 2 + 1)) > 0)){
+		String child1 = heapThing.get(index * 2);
+		String child2 = heapThing.get(index * 2 + 1);
+		if (child1.compareTo(child2) >= 0){ 
+		    temp = child2;
+		    heapThing.set(index * 2 + 1, value);
+		    newIndex = index * 2 + 1;
+		}
+		else {
+		    temp = child1;
+		    heapThing.set(index * 2, value);
+		    newIndex = index * 2;
+		}
+		heapThing.set(index, temp);
+		index = newIndex;
+	    }
+	}
+	    
     }
 
     public void add(String s) {
@@ -83,7 +134,7 @@ public class MyHeap {
     }
 
     public static void main(String[] args) {
-	MyHeap test = new MyHeap();
+	MyHeap test = new MyHeap(false);
 	test.add("potato");
 	test.add("potatoa");
 	test.add("potatoaa");
