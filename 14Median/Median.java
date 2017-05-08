@@ -1,151 +1,73 @@
-import java.util.ArrayList;
 
 public class Median {
-    boolean isMax = true;
-    ArrayList<Integer> heapThing;
+    IntHeap left,right;
+    int size;
+    double median;
 
-    public Median() {
-	heapThing = new ArrayList<Integer>();
-	heapThing.add(0);
+    public Median(){
+	left = new IntHeap(true);
+	right = new IntHeap(false);
+	size = left.size() + right.size();
     }
 
-    public Median(boolean ifMax) {
-	isMax = ifMax;
-	heapThing = new ArrayList<Integer>();
-        heapThing.add(0);
-    }
 
-    private void pushUp(int index) {
-	Integer temp;
-	Integer value = heapThing.get(index);
-
-	if(isMax) {
-	    
-	    while (index != 1 && value.compareTo(heapThing.get(index / 2)) > 0) {
-		temp = heapThing.get(index / 2);
-		heapThing.set(index / 2, heapThing.get(index));
-		heapThing.set(index, temp);
-		index = index / 2;
-	    }
+    public void add (int n) {
+        size++;
+	if (left.size() == 0 && right.size() == 0) {
+	    left.add(n);
+	    median = n;
+	    return;
 	}
+	if (n <= median) {
+	    left.add(n);
 
+	}
+	else{
+	    right.add(n);
+	    
+	}
+	if (left.size() > right.size() + 1) {
+	    right.add(left.remove());
+	}
+	else if (right.size() > left.size() + 1) {
+	    left.add(right.remove());
+	}
+	median = getMedian();
+	//System.out.println("m"+median);
+
+    }
+
+    public double getMedian() {
+	//System.out.println("lefttop: " + left.peek());
+	//System.out.println("rightop: " + right.peek());
+	if (size % 2 == 0) {
+	    return (left.peek() + right.peek()) / 2.0;
+	}
 	else {
-
-	    while (index != 1 && value.compareTo(heapThing.get(index / 2)) < 0) {
-		temp = heapThing.get(index / 2);
-		heapThing.set(index / 2, heapThing.get(index));
-		heapThing.set(index, temp);
-		index = index / 2;
+	    if (left.size() > right.size()) {
+		return left.peek();
+	    }
+	    else {
+		return right.peek();
 	    }
 	}
-    }
-
-    private void pushDown(int index) {
-	Integer value = heapThing.get(index);
-	Integer temp;
-	int newIndex;
-
-	if (isMax) {
-	    
-	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) < 0) { //if heap ends with only one child
-		temp = heapThing.get(index * 2);
-		heapThing.set(index * 2, value);
-		heapThing.set(index, temp);
-	    }
-	    
-	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) < 0 || value.compareTo(heapThing.get(index * 2 + 1)) < 0)){
-		Integer child1 = heapThing.get(index * 2);
-		Integer child2 = heapThing.get(index * 2 + 1);
-		if (child1.compareTo(child2) <= 0){ 
-		    temp = child2;
-		    heapThing.set(index * 2 + 1, value);
-		    newIndex = index * 2 + 1;
-		}
-		else {
-		    temp = child1;
-		    heapThing.set(index * 2, value);
-		    newIndex = index * 2;
-		}
-		heapThing.set(index, temp);
-		index = newIndex;
-	    }
-	}
-
-	else {
-
-	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) > 0) { //if heap ends with only one child
-		temp = heapThing.get(index * 2);
-		heapThing.set(index * 2, value);
-		heapThing.set(index, temp);
-	    }
-
-	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) > 0 || value.compareTo(heapThing.get(index * 2 + 1)) > 0)){
-		Integer child1 = heapThing.get(index * 2);
-		Integer child2 = heapThing.get(index * 2 + 1);
-		if (child1.compareTo(child2) >= 0){ 
-		    temp = child2;
-		    heapThing.set(index * 2 + 1, value);
-		    newIndex = index * 2 + 1;
-		}
-		else {
-		    temp = child1;
-		    heapThing.set(index * 2, value);
-		    newIndex = index * 2;
-		}
-		heapThing.set(index, temp);
-		index = newIndex;
-	    }
-	}
-	    
-    }
-
-    public void add(Integer s) {
-	heapThing.add(s);
-	if (heapThing.size() > 2) {
-	    pushUp(heapThing.size() - 1);
-	}
-    }
-
-    public Integer remove() {
-    	Integer toRet = heapThing.get(1);
-    	if (heapThing.size() - 1 == 1) {
-    	    return heapThing.remove(1);
-    	}
-    	Integer tempTop = heapThing.get(heapThing.size() - 1);
-    	heapThing.set(1, tempTop);
-    	heapThing.remove(heapThing.size() - 1);
-    	pushDown(1);
-	return toRet;
-    }
-        
-        
-	    
-
-    public Integer peek() {
-	return heapThing.get(1);
-    }
-
-    public String toString() {
-	String out = "[";
-	for (int i = 1; i < heapThing.size(); i++) {
-	    out += heapThing.get(i) + ", ";
-	}
-	return out.substring(0, out.length() - 2) + "]";
     }
 
     public static void main(String[] args) {
-	Median test = new Median(false);
+	Median test = new Median();
+	test.add(7);
+	test.add(5);
 	test.add(10);
-	test.remove();
-	test.add(15);
-	test.add(20);
-	System.out.println(test);
-	test.add(11);
-	System.out.println(test);
-	System.out.println(test.remove());
-	System.out.println(test);
-	System.out.println(test.peek());
-	
+	test.add(22);
+	test.add(25);
+	test.add(7);
+	test.add(1);
+	for (int i = 0; i < 100; i++) {
+	    test.add((int)(Math.random() * 200000));
+	}
+	System.out.println(test.getMedian());
     }
 }
-    
+
+
+
