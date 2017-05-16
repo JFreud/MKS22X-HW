@@ -1,0 +1,18 @@
+public class Location {
+    int row,col;
+    Location previous;
+    int distanceToStart;
+
+
+public Location
+
+
+
+
+
+
+
+
+
+
+}
