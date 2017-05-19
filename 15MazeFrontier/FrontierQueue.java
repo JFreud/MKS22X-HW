@@ -2,13 +2,13 @@ import java.util.*;
 
 public class FrontierQueue implements Frontier {
 
-    Queue<Location> fQueue = new Queue<Location>();
+    LinkedList<Location> fQueue = new LinkedList<Location>();
 
     public void add(Location loc) {
 	fQueue.add(loc);
     }
 
-    public Location remove() {
+    public Location next() {
 	return fQueue.remove();
     }
 
