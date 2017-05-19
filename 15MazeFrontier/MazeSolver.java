@@ -32,14 +32,20 @@ public class MazeSolver {
     }
 
     private void solveDFS() {
+	Location current = start;
+	FrontierStack fStack = new FrontierStack();
 	
+        fStack.add(maze.start);
 
+	while (!fStack.empty()) {
+	    
 
 
 }
 
 
-    private void solveBFS() {}
+    private void solveBFS() {
+    }
 
     private void solveBest() {}
 
