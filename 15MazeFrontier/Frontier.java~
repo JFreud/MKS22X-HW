@@ -1,0 +1,9 @@
+public interface Frontier {
+
+    public void add() {};
+
+    
+    public Location next() {};
+
+
+}

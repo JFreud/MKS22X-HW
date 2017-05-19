@@ -1,12 +1,14 @@
-import java.util.ArrayList;
+public class FrontierPriorityQueue implements Frontier {
 
-public class FrontierPriorityQueue {
+    MyHeap pQueue = new MyHeap(false);
 
-    ArrayList<Location> pQueue;
-
-    public FrontierPriorityQueue {
-	pQueue = new ArrayList<Location>();
-	pQueue.add(new Location(1,1,null,0,0,true));
+    public void add(Location loc) {
+	pQueue.add(loc);
     }
 
     
+    public Location next() {
+	return pQueue.remove();
+    }
+
+}
