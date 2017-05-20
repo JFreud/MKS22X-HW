@@ -45,64 +45,58 @@ public class IntHeap {
 	}
     }
 
-    private void pushDown(int index) {
-	Integer value = heapThing.get(index);
-	Integer temp;
-	int newIndex;
-
-	if (isMax) {
-	    
-	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) < 0) { //if heap ends with only one child
-		temp = heapThing.get(index * 2);
-		heapThing.set(index * 2, value);
-		heapThing.set(index, temp);
-	    }
-	    
-	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) < 0 || value.compareTo(heapThing.get(index * 2 + 1)) < 0)){
-		Integer child1 = heapThing.get(index * 2);
-		Integer child2 = heapThing.get(index * 2 + 1);
-		if (child1.compareTo(child2) <= 0){ 
-		    temp = child2;
-		    heapThing.set(index * 2 + 1, value);
-		    newIndex = index * 2 + 1;
-		}
-		else {
-		    temp = child1;
-		    heapThing.set(index * 2, value);
-		    newIndex = index * 2;
-		}
-		heapThing.set(index, temp);
-		index = newIndex;
-	    }
+    private boolean hasTwoChildren(int index) {
+	if (index * 2 + 1 <= heapThing.size() - 1) {
+	    return true;
 	}
-
-	else {
-
-	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) > 0) { //if heap ends with only one child
-		temp = heapThing.get(index * 2);
-		heapThing.set(index * 2, value);
-		heapThing.set(index, temp);
-	    }
-
-	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) > 0 || value.compareTo(heapThing.get(index * 2 + 1)) > 0)){
-		Integer child1 = heapThing.get(index * 2);
-		Integer child2 = heapThing.get(index * 2 + 1);
-		if (child1.compareTo(child2) >= 0){ 
-		    temp = child2;
-		    heapThing.set(index * 2 + 1, value);
-		    newIndex = index * 2 + 1;
-		}
-		else {
-		    temp = child1;
-		    heapThing.set(index * 2, value);
-		    newIndex = index * 2;
-		}
-		heapThing.set(index, temp);
-		index = newIndex;
-	    }
-	}
-	    
+	return false;
     }
+
+    
+
+    private void pushDown(int inputIndex) {
+        if (inputIndex > (heapThing.size() - 1) / 2) {
+	    return;
+	}
+	int index = inputIndex;
+	Integer value = heapThing.get(index);
+	Integer child1, child2;
+	
+	while (index <= (heapThing.size() - 1) / 2){
+	    child1 = heapThing.get(index * 2);
+	    if(!hasTwoChildren(index)) {
+		child2 = child1;
+	    }
+	    else{
+		child2 = heapThing.get(index * 2 + 1);
+	    }
+	    // System.out.println("child1: " + child1);
+	    //  System.out.println("value: " + value);
+	    //   System.out.println("mode: " + isMax);
+	    //   System.out.println("compare: " + (value.compareTo(child1) < 0));
+	    //   System.out.println("compare2: " + (value.compareTo(child2) < 0));
+	      
+	    if ((isMax && value.compareTo(child1) > 0 && value.compareTo(child2) > 0) ||
+		(!isMax && value.compareTo(child1) < 0 && value.compareTo(child2) < 0)){
+		break;
+	    }
+		
+	    if ((isMax && child1.compareTo(child2) < 0) ||
+		(!isMax && child1.compareTo(child2) > 0)){
+		heapThing.set(index, child2);
+		heapThing.set(index * 2 + 1, value);
+		index = index * 2 + 1;
+	    }
+	    else {
+	        //System.out.println("optionB");
+		heapThing.set(index,child1);
+		heapThing.set(index * 2, value);
+		index = index * 2;
+	    }
+	}
+	
+    }
+
 
     public void add(Integer s) {
 	heapThing.add(s);
@@ -117,8 +111,8 @@ public class IntHeap {
     	    return heapThing.remove(1);
     	}
     	Integer tempTop = heapThing.get(heapThing.size() - 1);
-    	heapThing.set(1, tempTop);
-    	heapThing.remove(heapThing.size() - 1);
+        heapThing.remove(heapThing.size() - 1);
+	heapThing.set(1, tempTop);
     	pushDown(1);
 	return toRet;
     }
@@ -127,11 +121,17 @@ public class IntHeap {
 	    
 
     public Integer peek() {
+	if (heapThing.size() == 1) {
+	    return null;
+	}
 	return heapThing.get(1);
     }
 
     public String toString() {
 	String out = "[";
+	if (heapThing.size() == 1) {
+	    return out + "]";
+	}
 	for (int i = 1; i < heapThing.size(); i++) {
 	    out += heapThing.get(i) + ", ";
 	}
@@ -139,22 +139,11 @@ public class IntHeap {
     }
 
     public static void main(String[] args) {
-	IntHeap test = new IntHeap();
+	IntHeap test = new IntHeap(false);
+	test.add(23);
+	test.add(0);
 	test.add(10);
 	test.remove();
-	test.add(15);
-	test.add(20);
-	System.out.println(test);
-	test.add(11);
-	test.add(7);
-	test.add(5);
-	test.add(13);
-	test.add(10);
-	test.add(22);
-	test.add(25);
-	System.out.println(test);
-	System.out.println(test.remove());
-	System.out.println(test);
 	System.out.println(test.peek());
 	
     }

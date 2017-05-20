@@ -26,14 +26,23 @@ public class RunningMedian {
 	    right.add(n);
 	    
 	}
-	if (left.size() > right.size() + 1) {
+
+	//System.out.println("m_b"+median);
+	if (left.size() > right.size()) {
+	    //System.out.println("removed left");
 	    right.add(left.remove());
 	}
-	else if (right.size() > left.size() + 1) {
-	    left.add(right.remove());
+	else if (right.size() > left.size()) {
+	    //System.out.println("peek1: " + right.peek());
+	    //System.out.println(right);
+            int tmp = right.remove();
+	    //System.out.println(right);
+	    //System.out.println("peek2: " + right.peek());
+	    //System.out.println("removed right\nsize:" + right.size());
+	    left.add(tmp);
 	}
 	median = getMedian();
-	//System.out.println("m"+median);
+	//System.out.println("m_s"+median);
 
     }
 
@@ -55,17 +64,19 @@ public class RunningMedian {
 
     public static void main(String[] args) {
 	RunningMedian test = new RunningMedian();
-	test.add(7);
-	test.add(5);
-	test.add(10);
-	test.add(22);
-	test.add(25);
-	test.add(7);
-	test.add(1);
-	for (int i = 0; i < 100; i++) {
-	    test.add((int)(Math.random() * 200000));
-	}
-	System.out.println(test.getMedian());
+	//System.out.println(test.getMedian()); FIX
+        test.add(0);
+	test.add(0);
+	test.add(8);
+	test.add(9);
+	test.add(4);
+	test.add(30);
+	test.add(6);
+	test.add(28);
+
+	test.add(16);
+	
+	
     }
 }
 

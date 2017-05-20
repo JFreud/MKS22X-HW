@@ -40,63 +40,55 @@ public class MyHeap {
 	}
     }
 
-    private void pushDown(int index) {
+
+     private boolean hasTwoChildren(int index) {
+	if (index * 2 + 1 <= heapThing.size() - 1) {
+	    return true;
+	}
+	return false;
+    }
+    
+     private void pushDown(int inputIndex) {
+        if (inputIndex > (heapThing.size() - 1) / 2) {
+	    return;
+	}
+	int index = inputIndex;
 	String value = heapThing.get(index);
-	String temp;
-	int newIndex;
-
-	if (isMax) {
-	    
-	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) < 0) { //if heap ends with only one child
-		temp = heapThing.get(index * 2);
-		heapThing.set(index * 2, value);
-		heapThing.set(index, temp);
+	String child1, child2;
+	
+	while (index <= (heapThing.size() - 1) / 2){
+	    child1 = heapThing.get(index * 2);
+	    if(!hasTwoChildren(index)) {
+		child2 = child1;
 	    }
-	    
-	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) < 0 || value.compareTo(heapThing.get(index * 2 + 1)) < 0)){
-		String child1 = heapThing.get(index * 2);
-		String child2 = heapThing.get(index * 2 + 1);
-		if (child1.compareTo(child2) <= 0){ 
-		    temp = child2;
-		    heapThing.set(index * 2 + 1, value);
-		    newIndex = index * 2 + 1;
-		}
-		else {
-		    temp = child1;
-		    heapThing.set(index * 2, value);
-		    newIndex = index * 2;
-		}
-		heapThing.set(index, temp);
-		index = newIndex;
+	    else{
+		child2 = heapThing.get(index * 2 + 1);
+	    }
+	    // System.out.println("child1: " + child1);
+	    //  System.out.println("value: " + value);
+	    //   System.out.println("mode: " + isMax);
+	    //   System.out.println("compare: " + (value.compareTo(child1) < 0));
+	    //   System.out.println("compare2: " + (value.compareTo(child2) < 0));
+	      
+	    if ((isMax && value.compareTo(child1) > 0 && value.compareTo(child2) > 0) ||
+		(!isMax && value.compareTo(child1) < 0 && value.compareTo(child2) < 0)){
+		break;
+	    }
+		
+	    if ((isMax && child1.compareTo(child2) < 0) ||
+		(!isMax && child1.compareTo(child2) > 0)){
+		heapThing.set(index, child2);
+		heapThing.set(index * 2 + 1, value);
+		index = index * 2 + 1;
+	    }
+	    else {
+	        //System.out.println("optionB");
+		heapThing.set(index,child1);
+		heapThing.set(index * 2, value);
+		index = index * 2;
 	    }
 	}
-
-	else {
-
-	    if (index * 2 == heapThing.size() - 1 && value.compareTo(heapThing.get(index * 2)) > 0) { //if heap ends with only one child
-		temp = heapThing.get(index * 2);
-		heapThing.set(index * 2, value);
-		heapThing.set(index, temp);
-	    }
-
-	    while (!(index > (heapThing.size() - 1) / 2 - 1) && (value.compareTo(heapThing.get(index * 2)) > 0 || value.compareTo(heapThing.get(index * 2 + 1)) > 0)){
-		String child1 = heapThing.get(index * 2);
-		String child2 = heapThing.get(index * 2 + 1);
-		if (child1.compareTo(child2) >= 0){ 
-		    temp = child2;
-		    heapThing.set(index * 2 + 1, value);
-		    newIndex = index * 2 + 1;
-		}
-		else {
-		    temp = child1;
-		    heapThing.set(index * 2, value);
-		    newIndex = index * 2;
-		}
-		heapThing.set(index, temp);
-		index = newIndex;
-	    }
-	}
-	    
+	
     }
 
     public void add(String s) {
@@ -122,11 +114,17 @@ public class MyHeap {
 	    
 
     public String peek() {
+	if (heapThing.size() == 1) {
+	    return null;
+	}
 	return heapThing.get(1);
     }
 
     public String toString() {
 	String out = "[";
+	if (heapThing.size() == 1) {
+	    return out + "]";
+	}
 	for (int i = 1; i < heapThing.size(); i++) {
 	    out += heapThing.get(i) + ", ";
 	}
@@ -134,18 +132,17 @@ public class MyHeap {
     }
 
     public static void main(String[] args) {
-	MyHeap test = new MyHeap();
-	test.add("potato");
-	test.remove();
-	test.add("potatoa");
-	test.add("potatoaa");
-	System.out.println(test);
-	test.add("john");
-	System.out.println(test);
-	System.out.println(test.remove());
+	MyHeap test = new MyHeap(false);
 	System.out.println(test);
 	System.out.println(test.peek());
-	
+	test.add("a");
+	test.add("b");
+	test.add("c");
+	test.add("d");
+	test.add("a");
+	test.remove();
+	test.remove();
+	System.out.println(test.peek());
     }
 }
     

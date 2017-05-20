@@ -25,6 +25,7 @@ public class Driver{
 	    test.add(a);
 	    sort(list);
 	    //System.out.println(median(list)+":"+test.getMedian());//decrease 1000 to like 10 and debug
+	    //System.out.println("left: " + test.left.peek() + "right: " + test.right.peek());
 	    //System.out.println(list.toString());//see the list
 	    int extra=(median(list) == test.getMedian()) ? Ws++ : Ls++;//ternary operator for those interested
 	}
