@@ -2,10 +2,10 @@ import java.util.*;
 
 public class FrontierStack implements Frontier {
 
-    Stack<Location> fStack;
+    private Stack<Location> fStack;
 
     public FrontierStack() {
-	fstack = new Stack<Location>();
+	fStack = new Stack<Location>();
     }
 
 

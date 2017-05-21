@@ -18,6 +18,18 @@ public class Location implements Comparable<Location> {
 	aStar = isItAStar;
     }
 
+    public int getRow() {
+	return row;
+    }
+
+    public int getCol() {
+	return col;
+    }
+
+    public Location getPrev() {
+	return previous;
+    }
+
     public int getGoalDist() {
 	return distToGoal;
     }
