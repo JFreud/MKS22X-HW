@@ -39,8 +39,8 @@ public class MazeSolver {
 	    aStar = true;
 	}
 	else{
-	    structure = new FrontierPriorityQueue();
-	    System.out.println("Invalid Input, use 0,1,2,3, using Best-First");
+	    structure = new FrontierQueue();
+	    System.out.println("Invalid Input, use 0,1,2,3, using BFS as default");
 	}
 
 	structure.add(maze.getStart());
@@ -58,7 +58,7 @@ public class MazeSolver {
 		// System.out.println(ccol);
 		// System.out.println(maze.getEnd().getRow());
 		// System.out.println(maze.getEnd().getRow());
-		System.out.println("end");
+		//System.out.println("end");
 		traceBack(current);
 		return;
 	    }
@@ -135,7 +135,7 @@ public class MazeSolver {
 
     public static void main(String[] args) {
 	MazeSolver test = new MazeSolver("data3.dat");
-	test.solve(1);
+	test.solve(2);
 	//System.out.println(test);
     }
 
