@@ -5,5 +5,7 @@ public interface Frontier {
     
     public Location next();
 
+    public boolean isEmpty();
+
 
 }

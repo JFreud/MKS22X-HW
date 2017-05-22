@@ -20,6 +20,8 @@ public class MazeSolver {
 
 	Location current;
 	int crow, ccol;
+	crow = maze.getStart().getRow();
+	ccol = maze.getStart().getCol();
 	int[] dir = {-1, 1};
         Frontier structure;
 	boolean aStar = false;;
@@ -45,7 +47,7 @@ public class MazeSolver {
 
 	structure.add(maze.getStart());
 
-	while (structure != null) {
+	while (!structure.isEmpty()) {
 	    System.out.println(maze.toString(100));
 	    current = structure.next();
 	    crow = current.getRow();
@@ -63,7 +65,7 @@ public class MazeSolver {
 		return;
 	    }
 	    else {
-		maze.set(crow, ccol, '@');
+		maze.set(crow, ccol, '.');
 	    }
 		
 	    
@@ -96,10 +98,10 @@ public class MazeSolver {
 		}
 	    }
 
-	    maze.set(crow, ccol, '.');
+	   
 	}
 
-	
+
     }
 
     //trace back function
@@ -134,8 +136,8 @@ public class MazeSolver {
 
 
     public static void main(String[] args) {
-	MazeSolver test = new MazeSolver("data3.dat");
-	test.solve(2);
+	MazeSolver test = new MazeSolver("data1.dat");
+	test.solve(3);
 	//System.out.println(test);
     }
 

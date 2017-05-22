@@ -12,6 +12,10 @@ public class FrontierQueue implements Frontier {
 	return fQueue.remove();
     }
 
+    public boolean isEmpty() {
+	return fQueue.size() == 0;
+    }
+
 
 
 }

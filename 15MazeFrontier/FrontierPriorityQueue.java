@@ -11,4 +11,8 @@ public class FrontierPriorityQueue implements Frontier {
 	return pQueue.remove();
     }
 
+    public boolean isEmpty() {
+	return pQueue.size() == 0;
+    }
+
 }

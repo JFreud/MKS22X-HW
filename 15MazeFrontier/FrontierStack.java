@@ -17,4 +17,7 @@ public class FrontierStack implements Frontier {
 	return fStack.pop();
     }
 
+    public boolean isEmpty() {
+	return fStack.empty();
+    }
 }
