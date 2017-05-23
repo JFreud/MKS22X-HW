@@ -20,8 +20,6 @@ public class MazeSolver {
 
 	Location current;
 	int crow, ccol;
-	crow = maze.getStart().getRow();
-	ccol = maze.getStart().getCol();
 	int[] dir = {-1, 1};
         Frontier structure;
 	boolean aStar = false;;
@@ -66,6 +64,7 @@ public class MazeSolver {
 	    }
 	    else {
 		maze.set(crow, ccol, '.');
+		//System.out.println(maze.toString(100));
 	    }
 		
 	    
