@@ -46,7 +46,7 @@ public class MazeSolver {
 	structure.add(maze.getStart());
 
 	while (!structure.isEmpty()) {
-	    System.out.println(maze.toString(100));
+	    //System.out.println(maze.toString(100));
 	    current = structure.next();
 	    crow = current.getRow();
 	    ccol = current.getCol();
@@ -116,7 +116,7 @@ public class MazeSolver {
             // System.out.println(crow);
 	    // System.out.println(ccol);
 	    //System.out.println("tracing");
-	    System.out.println(maze.toString(100));
+	    //System.out.println(maze.toString(100));
 	    //System.out.println(cur.getStartDist());
 	    crow = cur.getRow();
 	    ccol = cur.getCol();
@@ -124,7 +124,7 @@ public class MazeSolver {
 	    cur = cur.getPrev();
 	}
 	maze.set(cur.getRow(), cur.getCol(), 'S');
-	System.out.println(maze.toString(200));
+	//System.out.println(maze.toString(200));
     }
 	
 
@@ -137,7 +137,7 @@ public class MazeSolver {
     public static void main(String[] args) {
 	MazeSolver test = new MazeSolver("data1.dat");
 	test.solve(3);
-	//System.out.println(test);
+	System.out.println(test);
     }
 
 
