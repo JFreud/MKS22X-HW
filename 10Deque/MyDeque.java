@@ -4,6 +4,14 @@ public class MyDeque {
     String [] deque;
     int front, back, capacity, size;
     
+    public MyDeque() {
+	deque = new String[10];
+	front = 0;
+	back = 1;
+	size = 0;
+	this.capacity = 10;
+    }
+
     public MyDeque(int capacity) {
 	deque = new String[capacity];
 	front = 0;
