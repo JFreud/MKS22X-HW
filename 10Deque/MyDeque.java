@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class MyDeque {
     String [] deque;
@@ -59,6 +59,9 @@ public class MyDeque {
     }
 
     public String removeFirst() {
+	if (size == 0) {
+	    throw new NoSuchElementException();
+	}
 	int index = (front + 1) % capacity;
 	String retVal = deque[index];
 	deque[index] = null;
@@ -68,6 +71,9 @@ public class MyDeque {
     }
 
     public String removeLast() {
+	if (size == 0) {
+	    throw new NoSuchElementException();
+	}
 	int index = (back - 1 + capacity) % capacity;
 	String retVal = deque[index];
 	deque[index] = null;
