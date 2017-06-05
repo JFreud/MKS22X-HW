@@ -48,7 +48,7 @@ public class StackCalc {
 
 
     public static void main(String[] args) {
-	String test = "2 5 8 + *";
-	//System.out.println(PostFixEval.eval(test));
+	String test = "15 443 * 336 * 939 / 600 -";
+	System.out.println(StackCalc.eval(test));
     }
 }
