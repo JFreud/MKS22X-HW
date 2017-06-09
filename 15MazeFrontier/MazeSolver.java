@@ -139,6 +139,10 @@ public class MazeSolver {
     public String toString() {
 	return maze.toString();
     }
+
+    public String toString(int n) {
+	return maze.toString(n);
+    }
     
 
 
