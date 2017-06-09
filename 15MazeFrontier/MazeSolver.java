@@ -147,9 +147,9 @@ public class MazeSolver {
 
 
     public static void main(String[] args) {
-	MazeSolver test = new MazeSolver("data1.dat", true);
-	test.solve(3);
-	System.out.println(test);
+	MazeSolver s = new MazeSolver("data1.dat");
+	s.solve(1);
+	    String ans = s.toString();
     }
 
 
